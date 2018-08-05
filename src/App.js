@@ -13,7 +13,7 @@ class BooksApp extends Component {
   shelfUpdate = (book, shelf) => {
       let myBooks;
       if (this.state.books.findIndex(b => b.id === book.id) > 0) {
-        // change the position of an existing book in the shelf
+        // to change the position of a book between the shelfs 
         myBooks = this.state.books.map(b => {
           if (b.id === book.id) {
             return {...book, shelf}
@@ -22,7 +22,7 @@ class BooksApp extends Component {
           }
         })
       } else {
-        // add a new book to the shelf
+        // to handle adding new book to the shelf
         myBooks = [...this.state.books, {...book, shelf}]
       }
   

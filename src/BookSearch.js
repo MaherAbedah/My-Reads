@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import Book from './Book'
 
 
 class BookSearch extends Component {
@@ -63,7 +64,6 @@ class BookSearch extends Component {
                           <div className="book-authors">{book.authors ? book.authors.toString() : ''}</div>
                         </div>
                       </li>)}
-              	
               </ol>
             </div>
           </div>

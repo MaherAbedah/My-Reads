@@ -11,10 +11,10 @@ class BooksApp extends Component {
   }
 
   shelfUpdate = (book, shelf) => {
-      let books;
+      let myBooks;
       if (this.state.books.findIndex(b => b.id === book.id) > 0) {
         // change the position of an existing book in the shelf
-        books = this.state.books.map(b => {
+        myBooks = this.state.books.map(b => {
           if (b.id === book.id) {
             return {...book, shelf}
           } else {
@@ -23,13 +23,13 @@ class BooksApp extends Component {
         })
       } else {
         // add a new book to the shelf
-        books = [...this.state.books, {...book, shelf}]
+        myBooks = [...this.state.books, {...book, shelf}]
       }
   
-      this.setState({books})
-  
+      this.setState({books: myBooks})
+      //to update the shelf on the server
       BooksAPI.update(book, shelf).then((data) => {
-        // shelf updated on the server
+
       })
   }
 
@@ -45,7 +45,7 @@ class BooksApp extends Component {
     return (
       <div className="app">
         <Route path='/search' render={()=>(
-          <BookSearch onBookUpdate={(book, shelf) => this.shelfUpdate(book,shelf)} />
+          <BookSearch onBookUpdate={(book, shelf) => this.shelfUpdate(book,shelf)} books={this.state.books} />
         )}/>
         <Route exact path='/' render={()=>(
           <BooksList onShelfUpdate={(book, shelf) => this.shelfUpdate(book,shelf)} books={this.state.books}/>

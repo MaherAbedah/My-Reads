@@ -12,6 +12,9 @@ class BookSearch extends Component {
 	updateQuery = (query) => {
 		this.setState({query : query.trim() })
 	}
+	bookShelfChange = (book, shelf) => {
+		this.props.onBookUpdate(book, shelf)
+	} 
 	render(){
 		
 		if(this.state.query){
@@ -45,25 +48,8 @@ class BookSearch extends Component {
               <ol className="books-grid">
 
               	{ this.state.showingBooks.length > 0 &&
-              		this.state.showingBooks.map((book) =>
-                      <li key={book.id}>
-                        <div className="book">
-                          <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: book.imageLinks?  `url(${book.imageLinks.smallThumbnail})` : '' }}></div>
-                            <div className="book-shelf-changer">
-                              <select>
-                                <option value="move" disabled>Move to...</option>
-                                <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead">Want to Read</option>
-                                <option value="read">Read</option>
-                                <option value="none">None</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.authors ? book.authors.toString() : ''}</div>
-                        </div>
-                      </li>)}
+              		this.state.showingBooks.map((book) =>(
+                        <Book key={book.id} book={book} onChangeShelf={(book, shelf) => this.bookShelfChange(book, shelf)}/>))}
               </ol>
             </div>
           </div>

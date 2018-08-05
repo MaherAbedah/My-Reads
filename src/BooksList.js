@@ -21,7 +21,7 @@ class BooksList extends Component{
                   <h2 className="bookshelf-title">Currently Reading</h2>
                   <div className="bookshelf-books">
                     <ol className="books-grid">
-                    {this.props.books.filter(book => book.shelf ==='currentlyReading').map(book =>(
+                    {this.props.books.filter(book => book.shelf ==='currentlyReading').map((book) =>(
                       <Book key={book.id} book={book} onChangeShelf={(book, shelf) => this.changeShelf(book, shelf)}/>))}
                     </ol>
                   </div>
